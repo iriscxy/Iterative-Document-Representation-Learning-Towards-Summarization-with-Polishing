@@ -169,8 +169,7 @@ class MemN2N(object):
         gru_inputs = tf.concat([fact_vecs, attentions], 2)
 
         with tf.variable_scope('attention_gru', reuse=reuse):
-            cell=tf.contrib.rnn.GRUCell(self.hidden_size)
-            _, episode = tf.nn.dynamic_rnn(cell,
+            _, episode = tf.nn.dynamic_rnn(AttentionGRUCell(self.hidden_size),
                                            gru_inputs,
                                            dtype=np.float32
                                            )
